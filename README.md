@@ -1,4 +1,4 @@
-# Building a Crypto Calculator to Realize Profits
+# In Progress.. Building a Crypto Calculator to Realize Profits
 
 **Know when to take profit this bull run**
 
