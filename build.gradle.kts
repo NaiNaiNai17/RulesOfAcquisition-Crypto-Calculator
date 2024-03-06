@@ -25,6 +25,7 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 	implementation("jakarta.validation:jakarta.validation-api:3.1.0-M1")
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.16.1")
 	developmentOnly("org.springframework.boot:spring-boot-docker-compose")
 	runtimeOnly("com.h2database:h2")
 	runtimeOnly("io.micrometer:micrometer-registry-prometheus")

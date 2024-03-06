@@ -10,12 +10,24 @@ class CoinMarketCapApiClient(
     private val apiKey: String
 ) {
 
-    fun getCurrentPriceById(cryptoId: String): BigDecimal {
-        val url = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?id=$cryptoId"
-        val headers = mapOf("X-CMC_PRO_API_KEY" to apiKey)
+    fun getCurrentPriceByIdOrSymbol(cryptoId: String?, cryptoSymbol: String?): BigDecimal {
+        val url = urlByIdOrSymbol(cryptoId, cryptoSymbol)
+        val headers = mapOf(
+            "Accepts" to "application/json",
+            "Accept-Encoding" to "deflate, gzip",
+            "X-CMC_PRO_API_KEY" to apiKey
+        )
         val response = restTemplate.getForObject(url, String::class.java, headers)
             ?: throw RuntimeException("Failed to fetch data from CoinMarketCap API")
 
+    }
 
+   private  fun urlByIdOrSymbol(id: String?, symbol: String?): String {
+        val url = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest"
+        return when {
+            id != null -> "$url?id=$id"
+            symbol != null -> "$url?symbol=$symbol"
+            else -> throw IllegalArgumentException("Both id and symbol cannot be null")
+        }
     }
 }
